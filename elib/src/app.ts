@@ -1,5 +1,7 @@
-import express, { NextFunction, Request, Response } from "express";
-import { HttpError } from "http-errors";
+import express from "express";
+import createHttpError from "http-errors";
+// import { config } from "./config/config";
+import errorHandler from "./middleware/globalErrorHandler";
 // import { connectDB } from "./config/db";
 
 
@@ -9,21 +11,19 @@ const app = express();
 
 // HTTP methods
 
-app.get("/", (req, res) => {
-    res.send("hello");
+app.get("/", (req, res, next) => {
+
+    const error = createHttpError(400, "something went wrong");
+    throw error;
+
+    res.json({message : "hello world"});
 });
 
 
 
 // Global error handler middleware
 
-app.use((err : HttpError, req : Request, res : Response, next : NextFunction) => {
-    const statsusCode = err.statusCode || 500;
-
-
-    return res.status(statsusCode).json({
-
-})
+app.use(errorHandler);
 
 
 
