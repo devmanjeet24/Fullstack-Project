@@ -1,7 +1,7 @@
 import express from "express";
 import createHttpError from "http-errors";
-// import { config } from "./config/config";
 import errorHandler from "./middleware/globalErrorHandler";
+import userRouter from "./user/userRouter";
 // import { connectDB } from "./config/db";
 
 
@@ -21,9 +21,13 @@ app.get("/", (req, res, next) => {
 
 
 
+
 // Global error handler middleware
 
 app.use(errorHandler);
+
+
+app.use("/api/users", userRouter);
 
 
 
