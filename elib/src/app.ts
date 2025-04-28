@@ -2,6 +2,7 @@ import express from "express";
 import createHttpError from "http-errors";
 import errorHandler from "./middleware/globalErrorHandler";
 import userRouter from "./user/userRouter";
+import bookrouter from "./book/bookroutes";
 // import { connectDB } from "./config/db";
 
 
@@ -29,6 +30,7 @@ app.use(errorHandler);
 
 
 app.use("/api/users", userRouter);
+app.use("/api/books/", bookrouter)
 
 
 
