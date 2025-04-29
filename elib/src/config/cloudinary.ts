@@ -1,12 +1,13 @@
 import { v2 as cloudinary } from 'cloudinary';
+import { config } from './config';
 
 
 
     // Configuration
     cloudinary.config({ 
-        cloud_name: 'dnx27udjn', 
-        api_key: '195865957929279', 
-        api_secret: '<your_api_secret>' // Click 'View API Keys' above to copy your API secret
+        cloud_name: config.CloudinaryCloud, 
+        api_key: config.CloudinaryApiKey, 
+        api_secret: config.CloudinaryApiSecret
     });
 
     export default cloudinary;
