@@ -7,28 +7,28 @@ const createBook = async (req: Request, res: Response, next: NextFunction) => {
 
     console.log("files", req.files);
 
-    
+
 
     try {
 
 
         const files = req.files as { [fieldname: string]: Express.Multer.File[] };
-    const coverImageMimeType = files.coverImage[0].mimetype.split("/").at(-1);
-    const fileName = files.coverImage[0].filename;
+        const coverImageMimeType = files.coverImage[0].mimetype.split("/").at(-1);
+        const fileName = files.coverImage[0].filename;
 
-    const filePath = path.resolve(__dirname, '../../public/uploads', fileName);
-
-
-    const uploadReult = await cloudinary.uploader.upload(filePath, {
-        filename_override: fileName,
-        folder: "MyBookCover",
-        format: coverImageMimeType,
-    });
+        const filePath = path.resolve(__dirname, '../../public/uploads', fileName);
 
 
+        const uploadReult = await cloudinary.uploader.upload(filePath, {
+            filename_override: fileName,
+            folder: "MyBookCover",
+            format: coverImageMimeType,
+        });
 
-    const bookFileName = files.file[0].filename;
-    const bookFilepath = path.resolve(__dirname, "../../public/uploads", bookFileName);
+
+
+        const bookFileName = files.file[0].filename;
+        const bookFilepath = path.resolve(__dirname, "../../public/uploads", bookFileName);
 
 
 
@@ -41,15 +41,15 @@ const createBook = async (req: Request, res: Response, next: NextFunction) => {
 
         console.log("bookFileUploadResult", bookFileUploadResult);
 
-        
-    console.log("uploadReult", uploadReult);
 
-    res.json({ message: "hello world" });
+        console.log("uploadReult", uploadReult);
+
+        res.json({ message: "hello world" });
 
 
     } catch (error) {
         console.log("error", error);
-         return next(createHttpError(500, "Error while uploading the files"));
+        return next(createHttpError(500, "Error while uploading the files"));
     }
 
 
