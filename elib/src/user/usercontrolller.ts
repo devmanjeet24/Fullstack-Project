@@ -5,7 +5,11 @@ import bcrypt from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { config } from "../config/config";
 import { User } from "./userTypes";
+<<<<<<< HEAD
 import { access } from "fs";
+=======
+
+>>>>>>> manjeet
 
 
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
