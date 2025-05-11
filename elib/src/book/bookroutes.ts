@@ -1,46 +1,48 @@
-import express from 'express';
-import { createBook, ListBooks, updateBook } from './bookController';
-import path from 'node:path';
-import multer from 'multer';
-import authenticate from '../middleware/authenticate';
+import path from "node:path";
+import express from "express";
+import {
+  createBook,
+  deleteBook,
+  getSingleBook,
+  listBooks,
+  updateBook,
+} from "./bookController";
+import multer from "multer";
+import authenticate from "../middleware/authenticate";
 
-const bookrouter = express.Router();
+const bookRouter = express.Router();
 
-
+// file store local ->
 const upload = multer({
-  dest: path.resolve(__dirname, '../../public/uploads'),
-  limits: { fileSize: 3e7 }
-})
-
-
-bookrouter.post(
+  dest: path.resolve(__dirname, "../../public/data/uploads"),
+  // todo: put limit 10mb max.
+  limits: { fileSize: 3e7 }, // 30mb 30 * 1024 * 1024
+});
+// routes
+// /api/books
+bookRouter.post(
   "/",
   authenticate,
-
   upload.fields([
-    { name: 'coverImage', maxCount: 1 },
-    { name: 'file', maxCount: 1 },
+    { name: "coverImage", maxCount: 1 },
+    { name: "file", maxCount: 1 },
   ]),
+  createBook
+);
 
-  createBook);
+bookRouter.patch(
+  "/:bookId",
+  authenticate,
+  upload.fields([
+    { name: "coverImage", maxCount: 1 },
+    { name: "file", maxCount: 1 },
+  ]),
+  updateBook
+);
 
+bookRouter.get("/", listBooks);
+bookRouter.get("/:bookId", getSingleBook);
 
-  bookrouter.patch(
-    "/:bookID",
-    authenticate,
-  
-    upload.fields([
-      { name: 'coverImage', maxCount: 1 },
-      { name: 'file', maxCount: 1 },
-    ]),
-  
-    updateBook);
+bookRouter.delete("/:bookId", authenticate, deleteBook);
 
-
-    bookrouter.get('/', ListBooks);
-
-    // bookrouter.get('/:bookID', getsinglebook);
-
-
-
-export default bookrouter;
+export default bookRouter;

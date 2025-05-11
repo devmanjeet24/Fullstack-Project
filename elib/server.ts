@@ -1,19 +1,16 @@
-import {config} from "./src/config/config";
 import app from "./src/app";
-import  connectDB  from "./src/config/db";
+import { config } from "./src/config/config";
+import connectDB from "./src/config/db";
 
+const startServer = async () => {
+  // Connect database
+  await connectDB();
 
-const Startserver = async () => {
+  const port = config.port || 3000;
 
-    await connectDB();
+  app.listen(port, () => {
+    console.log(`Listening on port: ${port}`);
+  });
+};
 
-    const port =  config.port;
-    app.listen(port, () => {
-        console.log(`Server is running on port ${port}`);
-    });
-}
-
-Startserver();
-
-     
-// Last End : 1:42
+startServer();

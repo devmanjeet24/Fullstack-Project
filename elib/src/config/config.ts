@@ -8,7 +8,8 @@ const _config = {
     jwtSecret : process.env.JWT_SECRET,
     CloudinaryCloud : process.env.cloudinary_Cloud,
     CloudinaryApiKey : process.env.Cloudinary_API_KEY,
-    CloudinaryApiSecret : process.env.Cloudinary_SECRET
+    CloudinaryApiSecret : process.env.Cloudinary_SECRET,
+    frontendDomain : process.env.FRONTEND_DOMAIN
 }
 
 export const config = Object.freeze(_config);
