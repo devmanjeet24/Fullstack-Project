@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response } from "express";
+import express from 'express';
 import cors from "cors";
 import globalErrorHandler from "./middleware/globalErrorHandler";
 import userRouter from "./user/userRouter";
@@ -17,9 +17,9 @@ app.use(express.json());
 
 // Routes
 // Http methods: GET, POST, PUT, PATCH, DELETE
-app.get("/", (req : Request, res : Response, next : NextFunction) => {
-    res.json({ message: "Welcome to elib apis" });
-});
+// app.get("/", (req : Request, res : Response, next : NextFunction) => {
+//     res.json({ message: "Welcome to elib apis" });
+// });
 
 app.use("/api/users", userRouter);
 app.use("/api/books", bookRouter);
