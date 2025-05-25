@@ -1,5 +1,5 @@
 import Banner from "@/app/(home)/components/Banner";
-import ProductList from "./components/BookList";
+import BookList from "./components/BookList";
 
 
 export default async function Home() {
@@ -17,11 +17,11 @@ export default async function Home() {
      <>
         <Banner />
 
-        <ProductList />
+        <BookList books={books}/>
 
      </>
   );
 }
 
 
-// 52:48 
+// 01:26
