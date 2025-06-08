@@ -1,3 +1,4 @@
+import { Book } from '@/types';
 import Image from 'next/image';
 import React from 'react'
 
@@ -5,24 +6,27 @@ const SingleBookPage = async ({ params }: { params: { bookId: string } }) => {
 
     console.log('params', params)
 
-    try {
+    let book: Book | null = null;
 
+    try {
         const response = await fetch(`${process.env.BACKEND_URL}/books/${params.bookId}`);
         if (!response.ok) {
-            throw new Error("An error occured");
+            throw new Error("An error occurred");
         }
-
-        const book = await response.json();
-
-        console.log('book', book);
-
-    } catch (err : any) {
-
-        throw new Error('error fetching book');
-         
+        book = await response.json();
+    } catch (err: any) {
+        console.error(err);
+        return (
+            <div className="p-10 text-red-600">
+                <h2>Error loading book.</h2>
+            </div>
+        );
     }
 
 
+    if (!book) {
+        throw new Error("Book not found");
+    }
 
 
 
@@ -32,7 +36,7 @@ const SingleBookPage = async ({ params }: { params: { bookId: string } }) => {
                 <h2 className="mb-5 text-5xl font-bold leading-[1.1]">{book.title}</h2>
                 <span className="font-semibold">by {book.author.name}</span>
                 <p className="mt-5 text-lg leading-8">{book.description}</p>
-                <DownloadButton fileLink={book.file} />
+                {/* <DownloadButton fileLink={book.file} /> */}
             </div>
             <div className="flex justify-end">
                 <Image
