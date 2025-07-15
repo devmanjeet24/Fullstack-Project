@@ -1,5 +1,5 @@
 
-
+import { Button } from "@/components/ui/button"
 
 function App() {
 
@@ -8,6 +8,8 @@ function App() {
     <>
 
       <h1>Welcome to Elib Dashboard</h1>
+
+      <Button>Click Me</Button>
 
     </>
   )
