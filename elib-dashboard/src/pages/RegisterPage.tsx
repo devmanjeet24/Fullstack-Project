@@ -1,40 +1,59 @@
-
-
-// import { LoginForm } from "@/components/login-form"
-// import {
-//   Popover,
-//   PopoverContent,
-//   PopoverTrigger,
-// } from "@/components/ui/popover"
-// import {
-//   Accordion,
-//   AccordionContent,
-//   AccordionItem,
-//   AccordionTrigger,
-// } from "@/components/ui/accordion"
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Link } from "react-router-dom";
 
-const Loginpage = () => {
+
+const RegisterPage = () => {
   return (
-
     <section className="flex justify-center items-center h-screen">
 
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
+          <CardTitle>Sign Up</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Enter your information to create an account
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+
+
+           <div className="grid gap-4">
+
+              <div className="grid gap-2">
+                 <Label htmlFor="name">First Name</Label>
+                  <Input id="firstName" placeholder="John" required/>
+
+                
+              </div>
+
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email</Label>
+                  <Input id="Email" type="email" placeholder="john@example.com" required/>
+              </div>
+
+              <div className="grid gap-2">
+                <Label htmlFor="Password">Password</Label>
+                  <Input id="Password" type="password" placeholder="password" required/>
+              </div>
+
+             <Button type="submit" className="w-full">Create an account</Button>
+
+    
+
+             <div className="mt-4 text-center text-sm">
+              Already have an account{' '}
+              <Link to={'/login'} className="underline">Sign in</Link>
+             </div>
+           </div>
+
+
+
+          {/* <form>
             <div className="flex flex-col gap-6">
               <div className="grid gap-3">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">First Name</Label>
                 <Input
                   id="email"
                   type="email"
@@ -69,7 +88,7 @@ const Loginpage = () => {
                 Sign up
               </a>
             </div>
-          </form>
+          </form> */}
         </CardContent>
       </Card>
 
@@ -77,5 +96,4 @@ const Loginpage = () => {
   )
 }
 
-
-export default Loginpage;
+export default RegisterPage;
