@@ -4,13 +4,14 @@ import HomePage from "@/pages/Home";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardLayout from "./Layout/DashboardLayout";
 import Books from "./pages/Books";
+import AuthLayout from "./Layout/AuthLayout";
 
 
- const router = createBrowserRouter([
+const router = createBrowserRouter([
     {
         path: 'dashboard',
         element: <DashboardLayout />,
-        children : [
+        children: [
             {
                 path: 'home',
                 element: <HomePage />
@@ -22,14 +23,22 @@ import Books from "./pages/Books";
         ]
     },
     {
-        path: '/login',
-        element: <Loginpage />
-    },
-     {
-        path: '/register',
-        element: <RegisterPage />
-    },
-  
+        path: '/auth',
+        element: <AuthLayout />,
+        children: [
+            {
+                path: 'login',
+                element: <Loginpage />
+            },
+            {
+                path: 'register',
+                element: <RegisterPage />
+            },
+        ]
+    }
+
+
+
 ]);
 
 export default router;

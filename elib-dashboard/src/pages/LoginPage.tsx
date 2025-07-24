@@ -1,25 +1,29 @@
 
 
-// import { LoginForm } from "@/components/login-form"
-// import {
-//   Popover,
-//   PopoverContent,
-//   PopoverTrigger,
-// } from "@/components/ui/popover"
-// import {
-//   Accordion,
-//   AccordionContent,
-//   AccordionItem,
-//   AccordionTrigger,
-// } from "@/components/ui/accordion"
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 
 const Loginpage = () => {
+
+
+  const emailref = useRef<HTMLInputElement>(null);
+  const passwordref = useRef<HTMLInputElement>(null);
+
+  const handleLoginSubmit = () => {
+
+
+    const email = emailref.current?.value;
+    const password = passwordref.current?.value;
+
+
+    console.log("data", {email, password});
+
+  }
+
   return (
 
     <section className="flex justify-center items-center h-screen">
@@ -37,6 +41,7 @@ const Loginpage = () => {
               <div className="grid gap-3">
                 <Label htmlFor="email">Email</Label>
                 <Input
+                ref={emailref}
                   id="email"
                   type="email"
                   placeholder="m@example.com"
@@ -53,20 +58,27 @@ const Loginpage = () => {
                     Forgot your password?
                   </a>
                 </div>
-                <Input id="password" type="password" required />
+                <Input 
+                ref = {passwordref}
+                id="password" 
+                type="password" 
+                placeholder="Enter your ********"
+                required />
               </div>
               <div className="flex flex-col gap-3">
-                <Button type="submit" className="w-full">
+                <Button type="button" onClick={handleLoginSubmit} className="w-full">
                   Login
                 </Button>
-                <Button variant="outline" className="w-full">
+                {/* <Button variant="outline" className="w-full">
                   Login with Google
-                </Button>
+                </Button> */}
               </div>
             </div>
+
+
             <div className="mt-4 text-center text-sm">
               Don&apos;t have an account?{" "}
-              <Link to={'/register'} className="underline underline-offset-4">
+              <Link to={'/auth/register'} className="underline underline-offset-4">
                 Sign up
               </Link>
             </div>
