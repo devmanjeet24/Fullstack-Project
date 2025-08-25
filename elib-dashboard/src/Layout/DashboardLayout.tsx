@@ -16,13 +16,13 @@ import {
 import { Input } from "@/components/ui/input"
 import { Outlet } from "react-router-dom"
 
-const DashboardLayout = () => {
+  const DashboardLayout = () => {
   return (
     <>      <SidebarProvider>
-        <AppSidebar />
-        <SidebarInset>
-          <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 justify-between">
-            <div className="flex items-center">
+      <AppSidebar />
+      <SidebarInset>
+        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 justify-between">
+          <div className="flex items-center">
             <SidebarTrigger className="-ml-1" />
             <Separator
               orientation="vertical"
@@ -41,12 +41,12 @@ const DashboardLayout = () => {
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
-            </div>
-            <div>
-              <Input type="search" placeholder="Search" />
-            </div>
-          </header>
-          {/* <div className="flex flex-1 flex-col gap-4 p-4">
+          </div>
+          <div>
+            <Input type="search" placeholder="Search" />
+          </div>
+        </header>
+        {/* <div className="flex flex-1 flex-col gap-4 p-4">
             <div className="grid auto-rows-min gap-4 md:grid-cols-3">
               <div className="bg-muted/50 aspect-video rounded-xl" />
               <div className="bg-muted/50 aspect-video rounded-xl" />
@@ -56,13 +56,13 @@ const DashboardLayout = () => {
           </div> */}
 
 
-          <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+        <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
 
-           <Outlet />
+          <Outlet />
 
-          </main>
-        </SidebarInset>
-      </SidebarProvider></>
+        </main>
+      </SidebarInset>
+    </SidebarProvider></>
   )
 }
 

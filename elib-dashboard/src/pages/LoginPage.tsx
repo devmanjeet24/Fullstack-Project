@@ -4,23 +4,39 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { login } from "@/http/api";
+import { useMutation } from "@tanstack/react-query";
 import { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Loginpage = () => {
-
+ 
+  const navigate = useNavigate();
 
   const emailref = useRef<HTMLInputElement>(null);
   const passwordref = useRef<HTMLInputElement>(null);
 
+
+  const mutation = useMutation({
+    mutationFn: login,
+    onSuccess: () => {
+      console.log('login successfully');
+      navigate('/dashboard/home')
+    },
+  })
+
+
   const handleLoginSubmit = () => {
-
-
     const email = emailref.current?.value;
     const password = passwordref.current?.value;
+    console.log("data", { email, password });
 
+    if (!email || !password) {
+      return alert("Pleae enter email and password");
+    }
 
-    console.log("data", {email, password});
+    mutation.mutate({ email, password });
+
 
   }
 
@@ -41,7 +57,7 @@ const Loginpage = () => {
               <div className="grid gap-3">
                 <Label htmlFor="email">Email</Label>
                 <Input
-                ref={emailref}
+                  ref={emailref}
                   id="email"
                   type="email"
                   placeholder="m@example.com"
@@ -58,12 +74,12 @@ const Loginpage = () => {
                     Forgot your password?
                   </a>
                 </div>
-                <Input 
-                ref = {passwordref}
-                id="password" 
-                type="password" 
-                placeholder="Enter your ********"
-                required />
+                <Input
+                  ref={passwordref}
+                  id="password"
+                  type="password"
+                  placeholder="Enter your ********"
+                  required />
               </div>
               <div className="flex flex-col gap-3">
                 <Button type="button" onClick={handleLoginSubmit} className="w-full">
