@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { login } from "@/http/api";
+import useTokenstore from "@/store";
 import { useMutation } from "@tanstack/react-query";
 import { LoaderCircle } from "lucide-react";
 import { useRef } from "react";
@@ -14,14 +15,17 @@ const Loginpage = () => {
  
   const navigate = useNavigate();
 
+  const setToken = useTokenstore((state) => state.setToken);
+
   const emailref = useRef<HTMLInputElement>(null);
   const passwordref = useRef<HTMLInputElement>(null);
 
 
   const mutation = useMutation({
     mutationFn: login,
-    onSuccess: () => {
-      console.log('login successfully');
+    onSuccess: (response) => {
+      console.log('login successfully', response.data);
+      setToken(response.data.accessToken);
       navigate('/dashboard/home')
     },
   })
