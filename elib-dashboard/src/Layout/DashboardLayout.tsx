@@ -13,17 +13,32 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
 import { Navigate, Outlet } from "react-router-dom"
 import useTokenstore from "@/store"
+import { User } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 const DashboardLayout = () => {
 
 
-  const token = useTokenstore((state) => state.token);
+  const {token, setToken} = useTokenstore((state) => state);
 
-  if (token === ""){
+  if (token === "") {
     return <Navigate to={'/auth/login'} replace />
+  }
+
+  const logout = () => {
+    console.log('Logging out');
+     setToken('');
   }
 
 
@@ -52,8 +67,21 @@ const DashboardLayout = () => {
               </BreadcrumbList>
             </Breadcrumb>
           </div>
-          <div>
+          <div className="flex items-center gap-5 mr-8">
             <Input type="search" placeholder="Search" />
+            <DropdownMenu>
+              <DropdownMenuTrigger className=" border-2 p-2 rounded-full"><User /></DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Profile</DropdownMenuItem>
+                <DropdownMenuItem>Setting</DropdownMenuItem>
+                <DropdownMenuItem>Support</DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Button onClick={logout} variant={'link'}>Logout</Button>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </header>
 
