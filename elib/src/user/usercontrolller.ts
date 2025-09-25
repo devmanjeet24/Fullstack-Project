@@ -17,7 +17,6 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
         return next(error);
     }
 
-
     // Database call 
 
     try {
@@ -61,7 +60,7 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
 
         const token = sign({ sub: newUser._id }, config.jwtSecret as string, {
-            expiresIn: "1d"
+            expiresIn: 24 * 60 * 60,
         });
 
         res.status(201).json({ accessToken: token });
@@ -108,7 +107,7 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
     //  accesstoken 
 
     const token = sign({sub : user._id}, config.jwtSecret as string, {
-        expiresIn : "1d"
+        expiresIn : 24 * 60 *60
     })
 
 

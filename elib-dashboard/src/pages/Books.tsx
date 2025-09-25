@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/breadcrumb"
 import {
   Card,
-  CardAction,
+
   CardContent,
   CardDescription,
   CardFooter,
@@ -27,8 +27,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Ellipsis } from "lucide-react";
+import { Ellipsis, Plus } from "lucide-react";
 import type { Book } from "@/Types";
+import { Link } from "react-router-dom";
 
 
 
@@ -48,6 +49,9 @@ const Books = () => {
   return (
     <div>
 
+
+      <div className="flex items-center justify-between">
+        
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -60,6 +64,9 @@ const Books = () => {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
+
+      <Link to="createbook" className="flex items-center bg-black rounded-md text-white px-4 py-2 gap-1"><Plus size={15}/><span className="text-[12px]">Add Book</span></Link>
+      </div>
 
 
       <Card className="mt-6">
