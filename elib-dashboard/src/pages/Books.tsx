@@ -1,4 +1,4 @@
-import { getBooks } from "@/http/api";
+import { deleteBook, getBooks } from "@/http/api";
 import { useQuery } from "@tanstack/react-query";
 import {
   Breadcrumb,
@@ -29,7 +29,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Ellipsis, Plus } from "lucide-react";
 import type { Book } from "@/Types";
-import { Link } from "react-router-dom";
+import { Link, Links, NavLink } from "react-router-dom";
 
 
 
@@ -45,6 +45,16 @@ const Books = () => {
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error</div>;
+
+
+  const handleDelete = async(id : string) => {
+    try {
+      await deleteBook({ bookid: id });
+      alert("Book deleted successfully");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div>
@@ -132,8 +142,8 @@ const Books = () => {
                           </DropdownMenuTrigger>
                           <DropdownMenuContent>
                             <DropdownMenuLabel>Action</DropdownMenuLabel>
-                            <DropdownMenuItem>Edit</DropdownMenuItem>
-                            <DropdownMenuItem>Delete</DropdownMenuItem>
+                            <DropdownMenuItem><NavLink to={`/dashboard/books/${book._id}`}>Edit</NavLink></DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => handleDelete(book._id)}>Delete</DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </TableCell>

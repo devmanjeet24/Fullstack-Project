@@ -39,3 +39,15 @@ export const createBook = async (data : FormData) => {
         },
     });
 }
+
+export const updateBook = async ({bookid, data} : {bookid : string, data:FormData}) => {
+    return api.patch(`/api/books/${bookid}`, data, {
+        headers : {
+            'content-type' : 'multipart/form-data'
+        },
+    })
+}
+
+export const deleteBook = async ({bookid} : {bookid : string} ) => {
+   return api.delete(`/api/books/${bookid}`);
+}

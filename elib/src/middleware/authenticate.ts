@@ -18,10 +18,6 @@ const authenticate = (req: Request, res: Response, next: NextFunction) => {
         return next(createHttpError(401, "Unauthorized token not found"));
     }
 
-
-    
-
-
     try {
     const parsetoken = token.split(" ")[1];
     const decoded = verify(parsetoken, config.jwtSecret as string);
