@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import express from "express";
 import createHttpError from "http-errors";
 import errorHandler from "./middleware/globalErrorHandler";
@@ -7,6 +8,9 @@ import userRouter from "./user/userRouter";
 
 =======
 import express, { NextFunction, Request, Response } from "express";
+=======
+import express from 'express';
+>>>>>>> manjeet
 import cors from "cors";
 import globalErrorHandler from "./middleware/globalErrorHandler";
 import userRouter from "./user/userRouter";
@@ -38,10 +42,16 @@ app.get("/", (req, res, next) => {
 =======
 // Routes
 // Http methods: GET, POST, PUT, PATCH, DELETE
+<<<<<<< HEAD
 app.get("/", (req : Request, res : Response, next : NextFunction) => {
     res.json({ message: "Welcome to elib apis" });
 >>>>>>> manjeet
 });
+=======
+// app.get("/", (req : Request, res : Response, next : NextFunction) => {
+//     res.json({ message: "Welcome to elib apis" });
+// });
+>>>>>>> manjeet
 
 app.use("/api/users", userRouter);
 app.use("/api/books", bookRouter);

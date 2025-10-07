@@ -71,6 +71,7 @@ const updateBook = async (req: Request, res: Response, next: NextFunction) => {
     const bookId = req.params.bookId;
 
     const book = await bookModel.findOne({ _id: bookId });
+    console.log(book?.author.toString(), "line74");
 
     if (!book) {
         return next(createHttpError(404, "Book not found"));
@@ -78,6 +79,7 @@ const updateBook = async (req: Request, res: Response, next: NextFunction) => {
     // Check access
     const _req = req as AuthRequest;
     if (book.author.toString() !== _req.userId) {
+        console.log(_req.userId);
         return next(createHttpError(403, "You can not update others book."));
     }
 
